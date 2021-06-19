@@ -13,7 +13,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun play_button_clicked(view: View) {
         val intent = Intent(this, QuestionarreActivity::class.java)
-        startActivity(intent)
+        startActivity(intent) // this doesn't actually work. THe QUestionarre activity crashes
     }
 
     private fun share_button_clicked(view: View) {
