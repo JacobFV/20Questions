@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.20Questions">
-        <activity android:name=".QuestionarreActivity"></activity>
+        <activity
+            android:name=".ScoresActivity"
+            android:label="@string/title_activity_scores"
+            android:theme="@style/Theme.20Questions.NoActionBar"></activity>
+        <activity android:name=".QuestionarreActivity" />
         <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
