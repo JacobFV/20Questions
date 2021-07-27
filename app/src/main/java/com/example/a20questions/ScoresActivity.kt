@@ -20,6 +20,7 @@ class ScoresActivity : AppCompatActivity() {
         binding = ActivityScoresBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        /* I commented this out because it `binding.toolbar` makes a bug - Jacob
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_fragment_content_scores)
@@ -29,12 +30,14 @@ class ScoresActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-        }
+        }*/
     }
 
+    /*  I deleted this because I believe Android OS should
+        automatically make a back gesture handler for us - Jacob
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_scores)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
-    }
+    }*/
 }

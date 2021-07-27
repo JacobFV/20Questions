@@ -11,12 +11,12 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
     }
 
-    private fun play_button_clicked(view: View) {
+    fun play_button_clicked(view: View) {
         val intent = Intent(this, QuestionarreActivity::class.java)
-        startActivity(intent) // this doesn't actually work. THe QUestionarre activity crashes
+        startActivity(intent)
     }
 
-    private fun share_button_clicked(view: View) {
+    fun share_button_clicked(view: View) {
 
     }
 

@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.20Questions">
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
-        <activity
             android:name=".ScoresActivity"
             android:label="@string/title_activity_scores"
             android:theme="@style/Theme.20Questions.NoActionBar" />
