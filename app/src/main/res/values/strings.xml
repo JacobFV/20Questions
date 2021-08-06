@@ -18,4 +18,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    <string name="share_subject">I just played 20Q</string>
+    <string name="share_using">I just played 20Q</string>
 </resources>
