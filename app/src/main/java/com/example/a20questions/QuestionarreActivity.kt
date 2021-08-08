@@ -10,11 +10,12 @@ class QuestionarreActivity : AppCompatActivity() {
         setContentView(R.layout.activity_questionarre)
     }
 
+    private fun answer(answer: Answer) {
+        // this is where all the game logic happens
+    }
 
     fun addQuestion(question: String) {
         // TODO: Manish can you please add the question to the recycler view
-    private fun answer(answer: Answer) {
-        // this is where all the game logic happens
     }
 
     private fun addTextElement(question: String) {
@@ -47,5 +48,3 @@ class QuestionarreActivity : AppCompatActivity() {
 
     }
 }
-
-enum class Answer { YES, NOTSURE, NO }

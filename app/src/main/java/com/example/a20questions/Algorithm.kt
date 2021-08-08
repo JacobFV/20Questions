@@ -104,6 +104,8 @@ class Algorithm(val domain: Domain, questionarreActivity: QuestionarreActivity) 
     }
 }
 
+enum class Answer { YES, NOTSURE, NO }
+
 enum class AnswerState {
     NoAnswer,
     OneAnswer,

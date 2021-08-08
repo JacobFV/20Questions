@@ -58,7 +58,7 @@
             android:orientation="horizontal"
             android:gravity="center">
 
-                <Button
+            <Button
                 android:id="@+id/play_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

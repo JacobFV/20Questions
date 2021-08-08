@@ -167,8 +167,9 @@ public class QuestionareActivity extends AppCompatActivity {
         quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),MainActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                //startActivity(intent);
+                finish();
             }
         });
     }
@@ -203,8 +204,9 @@ public class QuestionareActivity extends AppCompatActivity {
         button_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(),MainActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                //startActivity(intent);
+                finish();
             }
         });
     }
@@ -244,8 +246,9 @@ public class QuestionareActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 guessed_character = editText.getText().toString();
-                Intent intent = new Intent(getBaseContext(),MainActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                //startActivity(intent);
+                finish();
             }
         });
     }

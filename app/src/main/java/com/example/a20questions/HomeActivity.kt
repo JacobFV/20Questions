@@ -11,9 +11,10 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         val button = findViewById<Button>(R.id.play_button)
-            button.setOnClickListener{
-                val intent = Intent(this,QuestionareActivity::class.java)
+            button.setOnClickListener {
+                val intent = Intent(this, QuestionareActivity::class.java)
                 startActivity(intent)
+            }
     }
 
     fun share_button_clicked(view: View) {
@@ -33,5 +34,8 @@ class HomeActivity : AppCompatActivity() {
         startActivity(shareIntent)
     }
 
+    fun play_button_clicked(view: View) {
+
+    }
 
 }
