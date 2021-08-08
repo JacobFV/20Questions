@@ -246,9 +246,15 @@ public class QuestionareActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 guessed_character = editText.getText().toString();
+<<<<<<< Updated upstream
                 //Intent intent = new Intent(getBaseContext(),MainActivity.class);
                 //startActivity(intent);
                 finish();
+=======
+                Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                intent.putExtra("win", win_value);
+                startActivity(intent);
+>>>>>>> Stashed changes
             }
         });
     }
