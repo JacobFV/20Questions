@@ -29,7 +29,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
+    RecyclerView scoresRecyclerView;
+    RecyclerAdapter scoresRecyclerAdapter;
+    List<String> gamecount =new ArrayList<String>();
+    List<String> win_value = new ArrayList<String>();
+    List<String> lose_value = new ArrayList<String>();
     TextView title, lastScore,recentScore,allScore,copyRight;
     Button play;
     ImageView image;
@@ -40,11 +44,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         play = findViewById(R.id.play_button);
         image = findViewById(R.id.imageView);
+        scoresRecyclerView = findViewById(R.id.scoresrecyclerview);
+        scoresRecyclerAdapter = new RecyclerAdapter(gamecount, win_value); //don't know how to check if win_value or lose_value
 
         play.setOnClickListener(view ->{
 
         Intent intent =new Intent(this,QuestionareActivity.class);
         startActivity(intent);
+
         });
 
     }

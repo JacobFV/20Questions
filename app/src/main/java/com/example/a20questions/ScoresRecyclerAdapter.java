@@ -32,6 +32,9 @@ public class ScoresRecyclerAdapter extends RecyclerView.Adapter<ScoresRecyclerAd
     @Override
     public void onBindViewHolder(@NonNull ScoresViewHolder holder, int position) {
 
+        //  holder.gamecount
+        //  holder.win_value
+        //  holder.lose_value
         /*
         holder.Text_Q.setText(data.get(position));
         holder.Text_A.setText(ans.get(position));
@@ -46,10 +49,16 @@ public class ScoresRecyclerAdapter extends RecyclerView.Adapter<ScoresRecyclerAd
     }
 
     class ScoresViewHolder extends RecyclerView.ViewHolder {
-        TextView ; //scores
+        // TextView ; //scores
 
         public ScoresViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            //  gamecount = itemView.findViewByID(R.id.g_count);
+            //
+            //  holder.gamecount
+            //  holder.win_value
+            //  holder.lose_value
 
             /*
             Text_Q = itemView.findViewById(R.id.qText);

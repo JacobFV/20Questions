@@ -40,6 +40,9 @@ public class QuestionareActivity extends AppCompatActivity {
     String guessed_character;
     int count =0;
     int list_no =0;
+    int gamecount = 0;
+    int win_value = 0;
+    int lose_value = 0;
 
     Dialog dialog_guess,dialog_extended,menu_dialog;
     @Override
@@ -246,15 +249,17 @@ public class QuestionareActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 guessed_character = editText.getText().toString();
-<<<<<<< Updated upstream
+
                 //Intent intent = new Intent(getBaseContext(),MainActivity.class);
                 //startActivity(intent);
                 finish();
-=======
+
+
                 Intent intent = new Intent(getBaseContext(),MainActivity.class);
                 intent.putExtra("win", win_value);
+                intent.putExtra("lose", lose_value);
+                intent.putExtra("gamecount", gamecount);
                 startActivity(intent);
->>>>>>> Stashed changes
             }
         });
     }

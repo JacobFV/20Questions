@@ -91,7 +91,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/all_scores_recyclerview"
+            android:id="@+id/scoresrecyclerview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <!--TODO: we should populate the recycler view with the
