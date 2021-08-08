@@ -6,9 +6,103 @@
     android:layout_height="match_parent"
     tools:context=".QuestionarreActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/questionarre_recyclerview"
+    <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="411dp"
+        android:background="@drawable/background"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/view1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/menu_button"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="MENU"
+            android:layout_marginVertical="22dp"
+            android:textSize="22sp"
+            android:layout_marginLeft="288dp"
+           />
+
+        <TextView
+            android:id="@+id/question_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/linear_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/yes_button"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="10dp"
+                android:background="#3CAA3C"
+                android:text="YES"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/no_button"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="10dp"
+                android:background="#FF0000"
+                android:text="NO"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/maybe_button"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="10dp"
+                android:background="#FFFF00"
+                android:text="MAYBE"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:background="#A020F0"
+        app:layout_constraintBottom_toTopOf="@id/recyclerview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear"
+        android:text="QUESTIONS AND ANSWERS"
+        android:textSize="30sp"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view1"
+        android:background="@drawable/rainbow"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

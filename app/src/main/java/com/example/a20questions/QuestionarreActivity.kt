@@ -4,11 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 class QuestionarreActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_questionarre)
     }
 
+
+    fun addQuestion(question: String) {
+        // TODO: Manish can you please add the question to the recycler view
     private fun answer(answer: Answer) {
         // this is where all the game logic happens
     }
