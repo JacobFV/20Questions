@@ -1,9 +1,11 @@
 package com.example.a20questions.ui.home
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -26,29 +28,12 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        savedGamesListAdaptor = SavedGameRecyclerAdapter(mutableListOf(
-            SavedGame(1, 1628524385, "Aug 9, 2021 10:00am",
-                exampleQuestionsAndAnswers1, true, "test"),
-            SavedGame(1, 1628524399, "Aug 9, 2021 10:05am",
-                exampleQuestionsAndAnswers1, true, "test"),
-            SavedGame(1, 1628524801, "Aug 9, 2021 11:00am",
-                exampleQuestionsAndAnswers2, false, "test"),
-            SavedGame(1, 1628525002, "Aug 9, 2021 11:35am",
-                exampleQuestionsAndAnswers2, false, "test"),
-        ))
+        initData()
         initView()
-        //initData()
-    }
-
-    private fun initView() {
-        val savedGamesRecyclerView: RecyclerView =
-            findViewById(R.id.home_savedgames_recyclerview)
-        savedGamesRecyclerView.adapter = savedGamesListAdaptor
-        //savedGamesRecyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        savedGamesRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     private fun initData() {
+        //savedGamesListAdaptor = SavedGameRecyclerAdapter(mutableListOf())
         // thanks:
         // https://medium.com/@tonia.tkachuk/android-app-example-using-room-database-63f7091e69af
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
@@ -58,6 +43,15 @@ class HomeActivity : AppCompatActivity() {
             }
         )
         // end thanks
+    }
+
+    private fun initView() {
+        val savedGamesRecyclerView: RecyclerView =
+            findViewById(R.id.home_savedgames_recyclerview)
+        savedGamesListAdaptor = SavedGameRecyclerAdapter(this)
+        savedGamesRecyclerView.adapter = savedGamesListAdaptor
+        savedGamesRecyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        savedGamesRecyclerView.layoutManager = LinearLayoutManager(this)
     }
 
     fun play_button_clicked(view: View) {

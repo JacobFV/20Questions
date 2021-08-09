@@ -1,6 +1,7 @@
 package com.example.a20questions.ui.home;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +18,14 @@ import java.util.List;
 
 public class SavedGameRecyclerAdapter extends RecyclerView.Adapter<SavedGameRecyclerAdapter.SavedGameViewHolder> {
 
-    private List<SavedGame> savedGames;
+    private Context context;
+    private LayoutInflater layoutInflater;
+    private List<SavedGame> savedGames = null;
 
-    public SavedGameRecyclerAdapter(List<SavedGame> savedGames) {
-        this.savedGames = savedGames;
+    public SavedGameRecyclerAdapter(Context context) {
+        this.context = context;
+        layoutInflater = LayoutInflater.from(context);
+        //this.savedGames = savedGames;
     }
 
     @NonNull
