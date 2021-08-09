@@ -17,7 +17,7 @@
             android:name=".ui.RegistrationActivity"
             android:label="Registration" />
         <activity
-            android:name=".ui.HomeActivity"
+            android:name=".ui.home.HomeActivity"
             android:label="Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

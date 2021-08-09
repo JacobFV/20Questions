@@ -1,11 +1,13 @@
 package com.example.a20questions.data
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
 interface SavedGameDao {
-    @Query("SELECT * FROM savedgame ORDER BY time_completed_seconds ASC")
-    fun getAll(): List<SavedGame>
+
+    @get:Query("SELECT * FROM savedgame ORDER BY time_completed_seconds ASC")
+    val allSavedGame: LiveData<List<SavedGame>>
 
     @Query("SELECT * FROM savedgame WHERE username = (:username) ORDER BY time_completed_seconds ASC")
     fun getAllForUser(username: String): List<SavedGame>
@@ -18,4 +20,7 @@ interface SavedGameDao {
 
     @Delete
     fun delete(savedGame: SavedGame)
+
+    @Query("DELETE FROM savedgame")
+    fun deleteAll()
 }

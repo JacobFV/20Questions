@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 // game data: only saved after the game is completed
 // partial games are not saved
-@Entity
+@Entity(tableName = "savedgame")
 data class SavedGame(
     @PrimaryKey val gid: Int, // gid = game ID
     @ColumnInfo(name = "time_completed_seconds") val time_completed_seconds: Int, // raw seconds since Jan 1, 1970 (used for sorting)
