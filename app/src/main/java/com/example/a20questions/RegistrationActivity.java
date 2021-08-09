@@ -1,4 +1,4 @@
-package com.example.a20q;
+package com.example.a20questions;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

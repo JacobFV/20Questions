@@ -1,4 +1,4 @@
-package com.example.a20q;
+package com.example.a20questions;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,12 +35,13 @@ public class MainActivity extends AppCompatActivity {
         Login = (Button) findViewById(R.id.btnLogin);
         Register = (Button) findViewById(R.id.btnRegister);
 
+        FirebaseApp.initializeApp(this);
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (user != null){
             finish();
-            startActivity(new Intent(MainActivity.this, HomepageActivity.class));
+            startActivity(new Intent(MainActivity.this, HomeActivity.class));
         }
 
         Login.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this, HomepageActivity.class));
+                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
                     Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(MainActivity.this, "Login Failed!", Toast.LENGTH_LONG).show();
