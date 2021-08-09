@@ -15,13 +15,9 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a20questions.R
-import com.example.a20questions.data.AppDatabase
-import com.example.a20questions.data.SavedGame
-import com.example.a20questions.data.exampleQuestionsAndAnswers1
-import com.example.a20questions.data.exampleQuestionsAndAnswers2
+import com.example.a20questions.data.*
 import com.example.a20questions.ui.questionnairre.QuestionnaireActivity
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -51,7 +47,6 @@ class HomeActivity : AppCompatActivity() {
                     Log.d("savedgames[i]", it.time_completed_formatted)
                 //    Log.d("savedgames[i]", it.questions_and_answers)
                 }
-
             }
         )
         // end thanks
