@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,7 +57,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 Toast.makeText(RegistrationActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                             } else {
-                                Toast.makeText(RegistrationActivity.this, "Registration Failed", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegistrationActivity.this, "We could not create a new user account with your email and password. Please try again", Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -70,8 +71,10 @@ public class RegistrationActivity extends AppCompatActivity {
         String pass = getPass.getText().toString();
 
         if (email.isEmpty() || pass.isEmpty()) {
-            Toast.makeText(RegistrationActivity.this, "Please enter all fields.", Toast.LENGTH_LONG).show();
-        } else {
+            Toast.makeText(RegistrationActivity.this, "Email or Password can't be empty", Toast.LENGTH_LONG).show();
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            getEmail.setError("Please enter a valid email address");
+        }else {
             int passLen = pass.length();
             Boolean up = false;
             Boolean low = false;
@@ -85,7 +88,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
             if (up && low && num && passLen >= 8) return true;
             else {
-                Toast.makeText(RegistrationActivity.this, "Password must need to meet requirements", Toast.LENGTH_LONG).show();
+                getPass.setError("Password does not meet requirements");
                 return false;
             }
         }
