@@ -1,19 +1,19 @@
 package com.example.a20questions.data
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface SavedGameDao {
-    @Query("SELECT * FROM savedgames")
+    @Query("SELECT * FROM savedgame ORDER BY time_completed_seconds ASC")
     fun getAll(): List<SavedGame>
 
-    @Query("SELECT * FROM savedgames WHERE gid IN (:gameIds)")
-    fun loadAllByIds(gameIds: IntArray): List<SavedGame>
+    @Query("SELECT * FROM savedgame WHERE username = (:username) ORDER BY time_completed_seconds ASC")
+    fun getAllForUser(username: String): List<SavedGame>
 
-    @Insert
+    //@Query("SELECT * FROM savedgame WHERE gid IN (:gameIds) ORDER BY time_completed_seconds ASC")
+    //fun loadAllByIds(gameIds: IntArray): List<SavedGame>
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertSavedGames(vararg savedGames: SavedGame)
 
     @Delete
