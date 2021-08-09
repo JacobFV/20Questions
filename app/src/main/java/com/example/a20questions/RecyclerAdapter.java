@@ -43,7 +43,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView Text_Q, Text_A,Q_number;
+        TextView Text_Q, Text_A, Q_number;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -10,11 +10,11 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        val button = findViewById<Button>(R.id.play_button)
-            button.setOnClickListener {
-                val intent = Intent(this, QuestionareActivity::class.java)
-                startActivity(intent)
-            }
+    }
+
+    fun play_button_clicked(view: View) {
+        val intent = Intent(this, QuestionnaireActivity::class.java)
+        startActivity(intent)
     }
 
     fun share_button_clicked(view: View) {
@@ -32,10 +32,6 @@ class HomeActivity : AppCompatActivity() {
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
-    }
-
-    fun play_button_clicked(view: View) {
-
     }
 
 }

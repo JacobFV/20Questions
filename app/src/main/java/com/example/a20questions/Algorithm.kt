@@ -9,7 +9,7 @@ import android.os.Environment
 import java.lang.Exception
 
 
-class Algorithm(val domain: Domain, questionarreActivity: QuestionarreActivity) {
+class Algorithm(val domain: Domain, questionarreActivity: QuestionnaireActivity) {
 
     var currentQuestion: String = ""
     var mysteryItemName: String? = null

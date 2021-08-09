@@ -26,7 +26,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionareActivity extends AppCompatActivity {
+/*public class QuestionareActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     Button menu, yes,no,maybe;
     TextView question;
@@ -255,3 +255,4 @@ public class QuestionareActivity extends AppCompatActivity {
 
 }
 
+*/

@@ -2,8 +2,9 @@ package com.example.a20questions
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 
-class QuestionarreActivity : AppCompatActivity() {
+class QuestionnaireActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,15 +37,15 @@ class QuestionarreActivity : AppCompatActivity() {
         //       that displays three buttons: "yes" and "no" ?
     }
 
-    fun answerYesPressed() {
-
+    fun answerYesPressed(view: View) {
+        answer(Answer.YES)
     }
 
-    fun answerNotSurePressed() {
-
+    fun answerNotSurePressed(view: View) {
+        answer(Answer.NOTSURE)
     }
 
-    fun answerNoPressed() {
-
+    fun answerNoPressed(view: View) {
+        answer(Answer.NO)
     }
 }
