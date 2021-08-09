@@ -21,44 +21,38 @@ import kotlinx.coroutines.*
 
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var savedGames: List<SavedGame>
     private lateinit var savedGamesListAdaptor: SavedGameRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        initData()
-        initView()
+        runBlocking { launch {
+            initData()
+            initView()
+        } }
     }
 
-    private fun initData() {
-        //savedGamesListAdaptor = SavedGameRecyclerAdapter(mutableListOf())
-        // thanks:
-        // https://medium.com/@tonia.tkachuk/android-app-example-using-room-database-63f7091e69af
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        homeViewModel.savedGamesList.observe(this,
-            Observer { savedGamesList: List<SavedGame> ->
-                savedGamesListAdaptor.setSavedGamesList(savedGamesList)
-
-                Log.d("num savedgames", savedGamesList.size.toString())
-                Log.d("savedgame", savedGamesList.toString())
-                savedGamesList.forEach {
-                    Log.d("savedgames[i]", it.username)
-                    Log.d("savedgames[i]", it.time_completed_formatted)
-                //    Log.d("savedgames[i]", it.questions_and_answers)
-                }
-            }
-        )
-        // end thanks
+    private suspend fun initData() {
+        Log.d("timing", "start init data")
+        withContext(Dispatchers.IO) {
+            val savedGameDao: SavedGameDao = AppDatabase.getDatabase(application).savedGameDao()
+            savedGameDao.insertSavedGames(savedGame1, savedGame2, savedGame3, savedGame4)
+            savedGames = savedGameDao.getAll()
+            Log.d("sgs initData", savedGames.size.toString())
+        }
+        Log.d("timing", "end init data")
     }
 
     private fun initView() {
+        Log.d("timing", "start init view")
         val savedGamesRecyclerView: RecyclerView =
             findViewById(R.id.home_savedgames_recyclerview)
-        savedGamesListAdaptor = SavedGameRecyclerAdapter(this)
+        savedGamesListAdaptor = SavedGameRecyclerAdapter(savedGames, "Manish")
         savedGamesRecyclerView.adapter = savedGamesListAdaptor
         savedGamesRecyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         savedGamesRecyclerView.layoutManager = LinearLayoutManager(this)
+        Log.d("timing", "end init view")
     }
 
     fun play_button_clicked(view: View) {

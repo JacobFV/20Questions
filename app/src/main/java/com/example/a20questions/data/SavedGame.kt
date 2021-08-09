@@ -13,5 +13,6 @@ data class SavedGame(
     @ColumnInfo(name = "time_completed_formatted") val time_completed_formatted: String, // Gregorian style "Oct 5, 2021 5:30PM"
     @ColumnInfo(name = "questions_and_answers") val questions_and_answers: String, // comma-separated questions and answers
     @ColumnInfo(name = "did_win") val did_win: Boolean,
+    @ColumnInfo(name = "num_questions") val num_questions: Int,
     @ColumnInfo(name = "username") val username: String
 )

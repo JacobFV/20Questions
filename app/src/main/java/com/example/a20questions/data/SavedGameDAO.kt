@@ -6,8 +6,8 @@ import androidx.room.*
 @Dao
 interface SavedGameDao {
 
-    @get:Query("SELECT * FROM savedgame ORDER BY time_completed_seconds ASC")
-    val allSavedGame: LiveData<List<SavedGame>>
+    @Query("SELECT * FROM savedgame ORDER BY time_completed_seconds ASC")
+    fun getAll(): List<SavedGame>
 
     @Query("SELECT * FROM savedgame WHERE username = (:username) ORDER BY time_completed_seconds ASC")
     fun getAllForUser(username: String): List<SavedGame>

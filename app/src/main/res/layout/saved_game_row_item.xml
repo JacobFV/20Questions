@@ -7,17 +7,33 @@
         android:id="@+id/savedgame_didwin_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="YOU WON"
-        android:textSize="16sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:layout_margin="@dimen/cardview_default_radius"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"/>
 
     <TextView
         android:id="@+id/savedgame_time_textview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Jan 1, 1970"
-        android:textSize="12sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:layout_toEndOf="@id/savedgame_didwin_textview"
+        android:layout_margin="@dimen/cardview_default_radius"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"/>
+
+    <TextView
+        android:id="@+id/savedgame_numQuestions_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:layout_toEndOf="@id/savedgame_time_textview"
         android:layout_margin="@dimen/cardview_default_radius"/>
 
 </LinearLayout>

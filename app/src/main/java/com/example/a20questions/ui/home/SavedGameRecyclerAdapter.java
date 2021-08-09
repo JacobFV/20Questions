@@ -1,8 +1,5 @@
 package com.example.a20questions.ui.home;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,14 +15,12 @@ import java.util.List;
 
 public class SavedGameRecyclerAdapter extends RecyclerView.Adapter<SavedGameRecyclerAdapter.SavedGameViewHolder> {
 
-    private Context context;
-    private LayoutInflater layoutInflater;
-    private List<SavedGame> savedGames = null;
+    List<SavedGame> savedGames;
+    String currentUsername;
 
-    public SavedGameRecyclerAdapter(Context context) {
-        this.context = context;
-        layoutInflater = LayoutInflater.from(context);
-        //this.savedGames = savedGames;
+    public SavedGameRecyclerAdapter(List<SavedGame> savedGames, String currentUsername) {
+        this.savedGames = savedGames;
+        this.currentUsername = currentUsername;
     }
 
     @NonNull
@@ -39,14 +34,13 @@ public class SavedGameRecyclerAdapter extends RecyclerView.Adapter<SavedGameRecy
     @Override
     public void onBindViewHolder(@NonNull SavedGameViewHolder holder, int position) {
         SavedGame savedGame = savedGames.get(position);
-
-        Log.d("holder", holder.toString());
-        Log.d("position", Integer.toString(position));
-        Log.d("savedgames size", Integer.toString(savedGames.size()));
-        Log.d("savedgames[0]", savedGames.get(0).getQuestions_and_answers());
-
-        //holder.didwinText.setText(savedGame.getDid_win() ? "You won!" : "You lost!");
-        //holder.timeText.setText(savedGame.getTime_completed_formatted());
+        String username = savedGame.getUsername();
+        if (username.equals(currentUsername)) {
+            username = "You";
+        }
+        holder.didwinText.setText(savedGame.getDid_win() ? username + " won!" : username + " lost!");
+        holder.timeText.setText(savedGame.getTime_completed_formatted());
+        holder.numQuestionsText.setText(Integer.toString(savedGame.getNum_questions()) + "Q");
     }
 
     @Override
@@ -59,18 +53,14 @@ public class SavedGameRecyclerAdapter extends RecyclerView.Adapter<SavedGameRecy
         }
     }
 
-    public void setSavedGamesList(List<SavedGame> savedGames) {
-        this.savedGames = savedGames;
-        notifyDataSetChanged();
-    }
-
     class SavedGameViewHolder extends RecyclerView.ViewHolder {
-        TextView didwinText, timeText;
+        TextView didwinText, timeText, numQuestionsText;
 
         public SavedGameViewHolder(@NonNull View itemView) {
             super(itemView);
             didwinText = (TextView) itemView.findViewById(R.id.savedgame_didwin_textview);
             timeText = (TextView) itemView.findViewById(R.id.savedgame_time_textview);
+            numQuestionsText = (TextView) itemView.findViewById(R.id.savedgame_numQuestions_textview);
         }
     }
 }

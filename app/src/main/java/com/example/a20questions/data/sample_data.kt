@@ -1,32 +1,11 @@
 package com.example.a20questions.data
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-
-// thanks: https://medium.com/@tonia.tkachuk/android-app-example-using-room-database-63f7091e69af
-suspend fun rePopulateDB(database: AppDatabase?) {
-    database?.let { db: AppDatabase ->
-        withContext(Dispatchers.IO) {
-            val userDao: UserDao = db.userDao()
-            val savedGameDao: SavedGameDao = db.savedGameDao()
-
-            userDao.deleteAll()
-            savedGameDao.deleteAll()
-
-            userDao.insertUsers(userMohammed, userJacob, userManish, userArwa)
-
-            savedGameDao.insertSavedGames(savedGame1, savedGame2, savedGame3, savedGame4)
-        }
-    }
-}
-// end thanks
-
 val userMohammed = User(1, "Mohammed", "1234")
 val userJacob = User(2, "Jacob", "1234")
 val userManish = User(3, "Manish", "1234")
 val userArwa = User(4, "Arwa", "1234")
 
-val exampleQuestionsAndAnswers1 = (
+const val exampleQuestionsAndAnswers1 = (
         "Does it have Spicy? No," +
                 "Does it have Sweet? Yes," +
                 "Does it have Salty? No," +
@@ -50,7 +29,7 @@ val exampleQuestionsAndAnswers1 = (
         )
 
 
-val exampleQuestionsAndAnswers2 = (
+const val exampleQuestionsAndAnswers2 = (
         "Does it have Brown? No," +
                 "Does it have Red? Yes," +
                 "Does it have Orange? No," +
@@ -74,7 +53,7 @@ val exampleQuestionsAndAnswers2 = (
         )
 
 
-val exampleQuestionsAndAnswers3 = (
+const val exampleQuestionsAndAnswers3 = (
         "Does it have Brown? No," +
                 "Does it have Red? Yes," +
                 "Does it have Orange? No," +
@@ -98,10 +77,18 @@ val exampleQuestionsAndAnswers3 = (
         )
 
 val savedGame1 = SavedGame(1, 1628524385, "Aug 9, 2021 10:00am",
-    exampleQuestionsAndAnswers1, true, userManish.username)
+    exampleQuestionsAndAnswers1, true, 20, userManish.username)
 val savedGame2 = SavedGame(2, 1628524399, "Aug 9, 2021 10:05am",
-    exampleQuestionsAndAnswers1, true, userJacob.username)
+    exampleQuestionsAndAnswers1, true, 20, userJacob.username)
 val savedGame3 = SavedGame(3, 1628524801, "Aug 9, 2021 11:00am",
-    exampleQuestionsAndAnswers2, false, userJacob.username)
+    exampleQuestionsAndAnswers2, false, 20, userJacob.username)
 val savedGame4 = SavedGame(4, 1628525002, "Aug 9, 2021 11:35am",
-    exampleQuestionsAndAnswers2, false, userJacob.username)
+    exampleQuestionsAndAnswers2, false, 20, userJacob.username)
+val savedGame5 = SavedGame(5, 1628524387, "Aug 19, 2021 10:00am",
+    exampleQuestionsAndAnswers1, true, 20, userManish.username)
+val savedGame6 = SavedGame(6, 1628524394, "Aug 19, 2021 10:05am",
+    exampleQuestionsAndAnswers1, true, 20, userJacob.username)
+val savedGame7 = SavedGame(7, 1628524803, "Aug 19, 2021 11:00am",
+    exampleQuestionsAndAnswers2, false,20,  userJacob.username)
+val savedGame8 = SavedGame(8, 1628525005, "Aug 19, 2021 11:35am",
+    exampleQuestionsAndAnswers2, false, 20, userJacob.username)
