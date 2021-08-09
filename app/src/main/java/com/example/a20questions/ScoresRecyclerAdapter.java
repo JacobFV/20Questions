@@ -55,7 +55,9 @@ public class ScoresRecyclerAdapter extends RecyclerView.Adapter<ScoresRecyclerAd
             super(itemView);
 
             //  gamecount = itemView.findViewByID(R.id.g_count);
-            //
+            //  win_value = itemView.findViewByID(R.id.w_value);
+            //  lose_value = itemView.findViewByID(R.id.l_value);
+
             //  holder.gamecount
             //  holder.win_value
             //  holder.lose_value
