@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.20Questions">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name">
         </activity>
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".ui.RegistrationActivity"
             android:label="Registration" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.HomeActivity"
             android:label="Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,11 +26,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ScoresActivity"
+            android:name=".ui.ScoresActivity"
             android:label="@string/title_activity_scores"
             android:theme="@style/Theme.20Questions.NoActionBar" />
         <activity
-            android:name=".QuestionnaireActivity"
+            android:name=".ui.QuestionnaireActivity"
             android:label="Questionnaire" />
     </application>
 

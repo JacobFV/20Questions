@@ -1,8 +1,10 @@
-package com.example.a20questions
+package com.example.a20questions.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.a20questions.Answer
+import com.example.a20questions.R
 
 class QuestionnaireActivity : AppCompatActivity() {
 

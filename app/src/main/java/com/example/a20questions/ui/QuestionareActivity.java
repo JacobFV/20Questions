@@ -1,4 +1,4 @@
-package com.example.a20questions;
+package com.example.a20questions.ui;
 
 import android.app.Dialog;
 import android.content.Intent;
