@@ -117,6 +117,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="info_button_clicked"
                 android:text="more info"
                 app:icon="@drawable/ic_baseline_info_24" />
 

@@ -9,30 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.20Questions">
-
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:label="@string/app_name">
         </activity>
-
         <activity
             android:name=".RegistrationActivity"
-            android:label="Home" />
-
+            android:label="Registration" />
         <activity
             android:name=".HomeActivity"
             android:label="Home">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ScoresActivity"
             android:label="@string/title_activity_scores"
             android:theme="@style/Theme.20Questions.NoActionBar" />
-
-        <activity android:name=".QuestionnaireActivity"
+        <activity
+            android:name=".QuestionnaireActivity"
             android:label="Questionnaire" />
     </application>
 

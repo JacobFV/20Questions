@@ -1,6 +1,7 @@
 package com.example.a20questions
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -32,6 +33,12 @@ class HomeActivity : AppCompatActivity() {
 
         val shareIntent = Intent.createChooser(sendIntent, null)
         startActivity(shareIntent)
+    }
+
+    fun info_button_clicked(view: View) {
+        val openURL = Intent(android.content.Intent.ACTION_VIEW)
+        openURL.data = Uri.parse("https://github.com/JacobFV/20Questions")
+        startActivity(openURL)
     }
 
 }
