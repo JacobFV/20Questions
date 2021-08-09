@@ -1,4 +1,4 @@
-package com.example.a20questions.ui;
+package com.example.a20questions.ui.questionnairre;
 
 import android.view.LayoutInflater;
 import android.view.View;

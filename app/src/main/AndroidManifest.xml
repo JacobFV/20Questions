@@ -30,7 +30,7 @@
             android:label="@string/title_activity_scores"
             android:theme="@style/Theme.20Questions.NoActionBar" />
         <activity
-            android:name=".ui.QuestionnaireActivity"
+            android:name=".ui.questionnairre.QuestionnaireActivity"
             android:label="Questionnaire" />
     </application>
 
