@@ -1,5 +1,7 @@
 package com.example.a20questions.ui.home;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,7 @@ import java.util.List;
 
 public class SavedGameRecyclerAdapter extends RecyclerView.Adapter<SavedGameRecyclerAdapter.SavedGameViewHolder> {
 
-    List<SavedGame> savedGames;
+    private List<SavedGame> savedGames;
 
     public SavedGameRecyclerAdapter(List<SavedGame> savedGames) {
         this.savedGames = savedGames;
@@ -25,14 +27,21 @@ public class SavedGameRecyclerAdapter extends RecyclerView.Adapter<SavedGameRecy
     @Override
     public SavedGameViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.row_item, parent, false);
-        return new SavedGameViewHolder(view);
+        View savedgameView = layoutInflater.inflate(R.layout.saved_game_row_item, parent, false);
+        return new SavedGameViewHolder(savedgameView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SavedGameViewHolder holder, int position) {
-        holder.didwinText.setText(savedGames.get(position).getDid_win() ? "You won!" : "You lost!");
-        holder.timeText.setText(savedGames.get(position).getTime_completed_formatted());
+        SavedGame savedGame = savedGames.get(position);
+
+        Log.d("holder", holder.toString());
+        Log.d("position", Integer.toString(position));
+        Log.d("savedgames size", Integer.toString(savedGames.size()));
+        Log.d("savedgames[0]", savedGames.get(0).getQuestions_and_answers());
+
+        //holder.didwinText.setText(savedGame.getDid_win() ? "You won!" : "You lost!");
+        //holder.timeText.setText(savedGame.getTime_completed_formatted());
     }
 
     @Override
@@ -50,8 +59,8 @@ public class SavedGameRecyclerAdapter extends RecyclerView.Adapter<SavedGameRecy
 
         public SavedGameViewHolder(@NonNull View itemView) {
             super(itemView);
-            didwinText = itemView.findViewById(R.id.savedgame_didwin_textview);
-            timeText = itemView.findViewById(R.id.savedgame_time_textview);
+            didwinText = (TextView) itemView.findViewById(R.id.savedgame_didwin_textview);
+            timeText = (TextView) itemView.findViewById(R.id.savedgame_time_textview);
         }
     }
 }
