@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         play.setOnClickListener(view ->{
 
-        Intent intent =new Intent(this,QuestionareActivity.class);
+        Intent intent = new Intent(this,QuestionareActivity.class);
         startActivity(intent);
 
         });
