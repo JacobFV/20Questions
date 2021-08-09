@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -19,6 +20,8 @@ import com.example.a20questions.data.SavedGame
 import com.example.a20questions.data.exampleQuestionsAndAnswers1
 import com.example.a20questions.data.exampleQuestionsAndAnswers2
 import com.example.a20questions.ui.questionnairre.QuestionnaireActivity
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 class HomeActivity : AppCompatActivity() {
 
@@ -40,6 +43,15 @@ class HomeActivity : AppCompatActivity() {
         homeViewModel.savedGamesList.observe(this,
             Observer { savedGamesList: List<SavedGame> ->
                 savedGamesListAdaptor.setSavedGamesList(savedGamesList)
+
+                Log.d("num savedgames", savedGamesList.size.toString())
+                Log.d("savedgame", savedGamesList.toString())
+                savedGamesList.forEach {
+                    Log.d("savedgames[i]", it.username)
+                    Log.d("savedgames[i]", it.time_completed_formatted)
+                //    Log.d("savedgames[i]", it.questions_and_answers)
+                }
+
             }
         )
         // end thanks

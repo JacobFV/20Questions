@@ -22,11 +22,11 @@ suspend fun rePopulateDB(database: AppDatabase?) {
 
             val savedGame1 = SavedGame(1, 1628524385, "Aug 9, 2021 10:00am",
                 exampleQuestionsAndAnswers1, true, userManish.username)
-            val savedGame2 = SavedGame(1, 1628524399, "Aug 9, 2021 10:05am",
+            val savedGame2 = SavedGame(2, 1628524399, "Aug 9, 2021 10:05am",
                 exampleQuestionsAndAnswers1, true, userJacob.username)
-            val savedGame3 = SavedGame(1, 1628524801, "Aug 9, 2021 11:00am",
+            val savedGame3 = SavedGame(3, 1628524801, "Aug 9, 2021 11:00am",
                 exampleQuestionsAndAnswers2, false, userJacob.username)
-            val savedGame4 = SavedGame(1, 1628525002, "Aug 9, 2021 11:35am",
+            val savedGame4 = SavedGame(4, 1628525002, "Aug 9, 2021 11:35am",
                 exampleQuestionsAndAnswers2, false, userJacob.username)
             savedGameDao.insertSavedGames(savedGame1, savedGame2, savedGame3, savedGame4)
         }
@@ -54,7 +54,7 @@ val exampleQuestionsAndAnswers1 = (
         "Does it have Bacon? No," +
         "Does it have Lettuce? Yes," +
         "Does it have Pickle? Yes," +
-        "Does it have Tomatoe? No," +
+        "Does it have Tomato? No," +
         "Does it have Bread? Yes"
 )
 

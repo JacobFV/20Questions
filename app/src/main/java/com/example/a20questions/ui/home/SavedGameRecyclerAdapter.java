@@ -51,7 +51,12 @@ public class SavedGameRecyclerAdapter extends RecyclerView.Adapter<SavedGameRecy
 
     @Override
     public int getItemCount() {
-       return savedGames.size();
+        if(savedGames != null)  {
+            return savedGames.size();
+        }
+        else {
+            return 0;
+        }
     }
 
     public void setSavedGamesList(List<SavedGame> savedGames) {

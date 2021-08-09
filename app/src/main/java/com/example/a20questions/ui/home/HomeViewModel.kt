@@ -1,6 +1,7 @@
 package com.example.a20questions.ui.home
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.example.a20questions.data.AppDatabase
@@ -14,5 +15,6 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         savedGamesList = savedGameDao.allSavedGame
+        Log.d("viewmodel", savedGamesList.toString())
     }
 }
