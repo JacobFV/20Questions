@@ -24,4 +24,8 @@
     <string name="play_more">Play 5 more rounds?</string>
     <string name="thinking_of">\"Were you thinking of \"</string>
     <string name="question_mark">\?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>

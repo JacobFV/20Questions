@@ -1,6 +1,5 @@
-package com.example.a20questions.ui;
+package com.example.a20questions.ui.accounts;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,11 +10,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.a20questions.R;
+import com.example.a20questions.data.UserHelperKt;
 import com.example.a20questions.ui.home.HomeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText Email;
+    private EditText Username;
     private EditText Password;
     private Button Login;
     private Button Register;
@@ -25,22 +25,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Email = (EditText) findViewById(R.id.etEmail);
+        Username = (EditText) findViewById(R.id.etUsername);
         Password = (EditText) findViewById(R.id.etPass);
         Login = (Button) findViewById(R.id.btnLogin);
         Register = (Button) findViewById(R.id.btnRegister);
 
-        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        /*if (user != null){
-            finish();
-            startActivity(new Intent(MainActivity.this, HomeActivity.class));
-        }*/
-
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate(Email.getText().toString(), Password.getText().toString());
+                validate(Username.getText().toString(), Password.getText().toString());
             }
         });
 
@@ -52,17 +45,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void validate(String email, String pass){
-        /*firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
-                    Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(MainActivity.this, "Login Failed!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
+    private void validate(String uname, String pass){
+        if (UserHelperKt.isValidUser(uname, pass, getApplication())) {
+            Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
+            homeIntent.putExtra("USERNAME", uname);
+            startActivity(homeIntent);
+            //Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(MainActivity.this,
+                    "Username or password are incorrect",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }
