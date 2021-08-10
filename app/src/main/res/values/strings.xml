@@ -21,4 +21,7 @@
 
     <string name="share_subject">I just played 20Q</string>
     <string name="share_using">I just played 20Q</string>
+    <string name="play_more">Play 5 more rounds?</string>
+    <string name="thinking_of">\"Were you thinking of \"</string>
+    <string name="question_mark">\?</string>
 </resources>

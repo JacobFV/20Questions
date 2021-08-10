@@ -34,17 +34,15 @@
             android:layout_margin="12dp" />
 
         <TextView
-            android:id="@+id/last_score"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Your last score was"
+            android:text="Your longest game was"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/most_recent_score_text"
+            android:id="@+id/longest_game_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MOST RECENT SCORE"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 

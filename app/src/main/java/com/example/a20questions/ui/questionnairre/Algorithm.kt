@@ -1,8 +1,6 @@
 package com.example.a20questions
 
 import com.opencsv.CSVReader
-import java.io.File
-import java.io.FileReader
 import android.widget.Toast
 
 import android.os.Environment
@@ -10,8 +8,7 @@ import android.util.Log
 import com.example.a20questions.ui.questionnairre.QuestionnaireActivity
 import java.lang.Exception
 import android.R
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import java.io.*
 
 
 class Algorithm(val domain: Domain, questionarreActivity: QuestionnaireActivity) {
@@ -22,55 +19,28 @@ class Algorithm(val domain: Domain, questionarreActivity: QuestionnaireActivity)
 
     private lateinit var currentProperty: String
     private lateinit var dataset: ItemDataset
+    private lateinit var previous_allitems: List<SingleItem>
 
     init {
         // converted to kotlin from origonal java and slightly modified:
         // https://stackoverflow.com/questions/43055661/reading-csv-file-in-android-app
         try {
             Log.d("csv", "step1")
-            /*val csvfile =
-                File(Environment.getExternalStorageDirectory().toString() + "/" +
-                        when (this.domain) {
-                            Domain.Superheroes -> "superheroes.csv"
-                            // add more Domain.other cases here
-                            // ex: Domain.A -> "A.csv"
-                            else -> Error("The mystery item domain is not supported by `Algorithm.kt`")
-                        })
-            Log.d("csv", "step2")
-            val reader = CSVReader(FileReader(csvfile.absolutePath))*/
-            /*val filepath = (
-                    questionarreActivity.applicationInfo.dataDir +
-                    File.separatorChar +
-                    when (this.domain) {
-                        Domain.Superheroes -> "superheroes.csv"
-                        // add more Domain.other cases here
-                        // ex: Domain.A -> "A.csv"
-                        else -> Error("Unknown mystery item domain")
-                    })
-            val otherFilepath = (
-                    Environment.getExternalStorageDirectory().toString() +
-                    File.separatorChar +
-                    when (this.domain) {
-                        Domain.Superheroes -> "superheroes.csv"
-                        // add more Domain.other cases here
-                        // ex: Domain.A -> "A.csv"
-                        else -> Error("The mystery item domain is not supported by `Algorithm.kt`")
-                    })
-            Log.d("csv", "step2a: fp=$filepath")
-            Log.d("csv", "step2a: fp=$otherFilepath")
-            val filereader = FileReader(filepath)*/
             val filepath = "android.resource://" + questionarreActivity.packageName + "/raw/superheroes.txt"
             Log.d("csv", "step2a: fp=$filepath")
-            val filereader = FileReader(filepath)
-            //val rr = questionarreActivity.resources.openRawResource()
-            //val isr = InputStreamReader(rr)
-            //val bufferedReader = BufferedReader(isr)
-            Log.d("csv", "step2b: filereader=$filereader")
-            //val reader = CSVReader(bufferedReader)
-            val reader = CSVReader(filereader)
+            val inputStream = questionarreActivity.assets.open(when (this.domain) {
+                Domain.Superheroes -> "superheroes.csv"
+                // add more Domain.other cases here
+                // ex: Domain.A -> "A.csv"
+                else -> "unknown"
+            })
+            Log.d("csv", "step2b: inputStream=$inputStream")
+            val bufferedReader = inputStream.bufferedReader()
+            Log.d("csv", "step2c: bufferedReader=$bufferedReader")
+            val reader = CSVReader(bufferedReader)
             Log.d("csv", "step3")
             dataset = ItemDataset(reader.readAll())
-            Log.d("csv", "step4")
+            Log.d("csv", "step4 dataset.size = ${dataset.allItems.size}")
             updateCurrentProperty()
             Log.d("csv", "step5")
             updateCurrentQuestionFromProperty()
@@ -85,31 +55,30 @@ class Algorithm(val domain: Domain, questionarreActivity: QuestionnaireActivity)
     }
 
     fun answerCurrentQuestion(answer: Answer) {
-        /*
-        Adjusts algorithm state based on answer supplied.
-        This step should only be used for yes/maybe/no questions
-
-        Filters all items in dataset
-        Assign potentialAnswers
-        If many potentialAnswers is many:
-            Assign next currentQuestion, property, and filter pool of properties
-         */
+        // Adjusts algorithm state based on answer supplied.
+        // This step should only be used for yes/maybe/no questions
 
         // early exit for the do almost nothing case
         if (answer == Answer.NOTSURE) {
             // update question
+            //Log.d("20q", "updating vars")
             updateCurrentProperty()
             updateCurrentQuestionFromProperty()
+            //Log.d("20q", "updated vars")
             return
         }
 
+        // Filters all items in dataset and Assign potentialAnswers
+        // Assign next currentQuestion, property, and filter pool of properties
+
         // remove elements that have a different value in currentProperty than the answer supplied
         val pcurrindex = dataset.propertyNames.indexOf(currentProperty)
-        dataset.allItems.forEach {
-            if(it.propertyValues[pcurrindex] != (answer == Answer.YES)) {
-                dataset.allItems.remove(it)
-            }
+        Log.d("alg", "filtering ${dataset.allItems.size} dataset elements")
+        previous_allitems = dataset.allItems
+        dataset.allItems = dataset.allItems.filter {
+            it.propertyValues[pcurrindex] == (answer == Answer.YES)
         }
+        Log.d("alg", "${dataset.allItems.size} dataset elements remaining")
 
         potentialAnswers = when(dataset.allItems.size) {
             0 -> AnswerState.NoAnswer
@@ -117,22 +86,44 @@ class Algorithm(val domain: Domain, questionarreActivity: QuestionnaireActivity)
             else -> AnswerState.ManyAnswers
         }
 
-        if (potentialAnswers == AnswerState.OneAnswer) {
-            mysteryItemName = dataset.allItems.first().name
-        }
+        when(potentialAnswers) {
+            AnswerState.NoAnswer -> {
+                Log.d("alg", "how did this happen?")
+                mysteryItemName = previous_allitems.random().name
+                Log.d("alg", "mystery guess = $mysteryItemName")
+                potentialAnswers = AnswerState.OneAnswer
+            }
+            AnswerState.OneAnswer -> {
+                mysteryItemName = dataset.allItems.first().name
+                Log.d("alg", "mystery solved = $mysteryItemName")
+            }
+            AnswerState.ManyAnswers -> {
+                Log.d("alg", "pre usablePropertyNames.size ${dataset.usablePropertyNames.size}")
+                dataset.usablePropertyNames.remove(currentProperty)
+                Log.d("alg", "post usablePropertyNames.size ${dataset.usablePropertyNames.size}")
 
-        if (potentialAnswers == AnswerState.ManyAnswers) {
-            // filter dataset property names to only include ones that are distinct
-            dataset.usablePropertyNames.remove(currentProperty)
-            dataset.usablePropertyNames = dataset.usablePropertyNames.filter { pname: String ->
-                dataset.allItems.all {
-                    it.propertyValues[dataset.propertyNames.indexOf(pname)] == dataset.allItems.first().propertyValues[dataset.propertyNames.indexOf(pname)]
-                }
-            }.toMutableList()
+                // filter dataset property names to only include ones that are distinct
+                Log.d("alg", "pre usablePropertyNames.size ${dataset.usablePropertyNames.size}")
+                dataset.usablePropertyNames = dataset.usablePropertyNames.filter { pname ->
+                    val pIndex = dataset.propertyNames.indexOf(pname)
+                    when {
+                        dataset.allItems.all {
+                            it.propertyValues[pIndex]
+                        } -> false
+                        dataset.allItems.all {
+                            !it.propertyValues[pIndex]
+                        } -> false
+                        else -> true
+                    }
+                }.toMutableList()
+                Log.d("alg", "post usablePropertyNames.size ${dataset.usablePropertyNames.size}")
 
-            // update question
-            updateCurrentProperty()
-            updateCurrentQuestionFromProperty()
+                // update question
+                Log.d("20q", "updating vars")
+                updateCurrentProperty()
+                updateCurrentQuestionFromProperty()
+                Log.d("20q", "updated vars")
+            }
         }
     }
 

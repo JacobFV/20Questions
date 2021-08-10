@@ -5,9 +5,12 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,16 +20,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.a20questions.R
 import com.example.a20questions.data.*
 import com.example.a20questions.ui.questionnairre.QuestionnaireActivity
+import kotlinx.android.synthetic.main.activity_scores.*
 import kotlinx.coroutines.*
+import kotlin.math.max
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var savedGames: List<SavedGame>
     private lateinit var savedGamesListAdaptor: SavedGameRecyclerAdapter
+    private lateinit var username: String
+    private var maxQuestions: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        username = intent.getStringExtra("USERNAME")?: userJacob.username
+
         runBlocking { launch {
             initData()
             initView()
@@ -37,8 +47,11 @@ class HomeActivity : AppCompatActivity() {
         Log.d("timing", "start init data")
         withContext(Dispatchers.IO) {
             val savedGameDao: SavedGameDao = AppDatabase.getDatabase(application).savedGameDao()
-            savedGameDao.insertSavedGames(savedGame1, savedGame2, savedGame3, savedGame4)
+            //savedGameDao.insertSavedGames(savedGame1, savedGame2, savedGame3, savedGame4)
             savedGames = savedGameDao.getAll()
+            savedGames.forEach {
+                maxQuestions = max(maxQuestions, it.num_questions)
+            }
             Log.d("sgs initData", savedGames.size.toString())
         }
         Log.d("timing", "end init data")
@@ -52,20 +65,31 @@ class HomeActivity : AppCompatActivity() {
         savedGamesRecyclerView.adapter = savedGamesListAdaptor
         savedGamesRecyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         savedGamesRecyclerView.layoutManager = LinearLayoutManager(this)
+        findViewById<TextView>(R.id.longest_game_text).text = "${maxQuestions}Q"
         Log.d("timing", "end init view")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //Code to refresh listview
+        runBlocking { launch {
+            initData()
+            initView()
+        } }
     }
 
     fun play_button_clicked(view: View) {
         val intent = Intent(this, QuestionnaireActivity::class.java)
+        intent.putExtra("USERNAME", username)
         startActivity(intent)
     }
 
     fun share_button_clicked(view: View) {
         /*This will be the actual content you wish you share.*/
         val shareBody = (
-            "I just <WON/LOST> against 20 Questions." +
-            "My score was <SCORE>. \n\n" +
-            "You can also 20 Questions by downloading the app at " +
+            "I just played 20 Questions." +
+            "My longest running game was $maxQuestions questions. \n\n" +
+            "You can also 20 Questions by downloading the app APK at " +
             "https://github.com/JacobFV/20Questions")
         val sendIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
