@@ -12,10 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.a20questions.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -23,7 +19,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText getPass;
     private Button Register;
     private Button SignOut;
-    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +30,9 @@ public class RegistrationActivity extends AppCompatActivity {
         Register = (Button) findViewById(R.id.btnReg);
         SignOut = (Button) findViewById(R.id.btnRegToLogin);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-
         SignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
             }
         });
@@ -51,7 +43,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 if (validate()) {
                     String email = getEmail.getText().toString().trim();
                     String pass = getPass.getText().toString().trim();
-                    firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    /*firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
@@ -61,7 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 Toast.makeText(RegistrationActivity.this, "We could not create a new user account with your email and password. Please try again", Toast.LENGTH_LONG).show();
                             }
                         }
-                    });
+                    });*/
                 }
             }
         });

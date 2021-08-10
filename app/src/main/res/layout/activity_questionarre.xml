@@ -23,7 +23,7 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/question_view"
+            android:id="@+id/question_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -45,7 +45,7 @@
                 android:onClick="answerYesPressed"/>
 
             <Button
-                android:id="@+id/maybe_button"
+                android:id="@+id/not_sure_button"
                 android:layout_width="@dimen/answer_width"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/answer_button_margin"

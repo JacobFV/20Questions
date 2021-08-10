@@ -6,8 +6,12 @@ import java.io.FileReader
 import android.widget.Toast
 
 import android.os.Environment
+import android.util.Log
 import com.example.a20questions.ui.questionnairre.QuestionnaireActivity
 import java.lang.Exception
+import android.R
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 
 class Algorithm(val domain: Domain, questionarreActivity: QuestionnaireActivity) {
@@ -23,7 +27,8 @@ class Algorithm(val domain: Domain, questionarreActivity: QuestionnaireActivity)
         // converted to kotlin from origonal java and slightly modified:
         // https://stackoverflow.com/questions/43055661/reading-csv-file-in-android-app
         try {
-            val csvfile =
+            Log.d("csv", "step1")
+            /*val csvfile =
                 File(Environment.getExternalStorageDirectory().toString() + "/" +
                         when (this.domain) {
                             Domain.Superheroes -> "superheroes.csv"
@@ -31,10 +36,45 @@ class Algorithm(val domain: Domain, questionarreActivity: QuestionnaireActivity)
                             // ex: Domain.A -> "A.csv"
                             else -> Error("The mystery item domain is not supported by `Algorithm.kt`")
                         })
-            val reader = CSVReader(FileReader(csvfile.absolutePath))
+            Log.d("csv", "step2")
+            val reader = CSVReader(FileReader(csvfile.absolutePath))*/
+            /*val filepath = (
+                    questionarreActivity.applicationInfo.dataDir +
+                    File.separatorChar +
+                    when (this.domain) {
+                        Domain.Superheroes -> "superheroes.csv"
+                        // add more Domain.other cases here
+                        // ex: Domain.A -> "A.csv"
+                        else -> Error("Unknown mystery item domain")
+                    })
+            val otherFilepath = (
+                    Environment.getExternalStorageDirectory().toString() +
+                    File.separatorChar +
+                    when (this.domain) {
+                        Domain.Superheroes -> "superheroes.csv"
+                        // add more Domain.other cases here
+                        // ex: Domain.A -> "A.csv"
+                        else -> Error("The mystery item domain is not supported by `Algorithm.kt`")
+                    })
+            Log.d("csv", "step2a: fp=$filepath")
+            Log.d("csv", "step2a: fp=$otherFilepath")
+            val filereader = FileReader(filepath)*/
+            val filepath = "android.resource://" + questionarreActivity.packageName + "/raw/superheroes.txt"
+            Log.d("csv", "step2a: fp=$filepath")
+            val filereader = FileReader(filepath)
+            //val rr = questionarreActivity.resources.openRawResource()
+            //val isr = InputStreamReader(rr)
+            //val bufferedReader = BufferedReader(isr)
+            Log.d("csv", "step2b: filereader=$filereader")
+            //val reader = CSVReader(bufferedReader)
+            val reader = CSVReader(filereader)
+            Log.d("csv", "step3")
             dataset = ItemDataset(reader.readAll())
+            Log.d("csv", "step4")
             updateCurrentProperty()
+            Log.d("csv", "step5")
             updateCurrentQuestionFromProperty()
+            Log.d("csv", "step6")
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(questionarreActivity,

@@ -12,12 +12,6 @@ import android.widget.Toast;
 
 import com.example.a20questions.R;
 import com.example.a20questions.ui.home.HomeActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText Password;
     private Button Login;
     private Button Register;
-    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +30,12 @@ public class MainActivity extends AppCompatActivity {
         Login = (Button) findViewById(R.id.btnLogin);
         Register = (Button) findViewById(R.id.btnRegister);
 
-        FirebaseApp.initializeApp(this);
-        firebaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (user != null){
+        /*if (user != null){
             finish();
             startActivity(new Intent(MainActivity.this, HomeActivity.class));
-        }
+        }*/
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void validate(String email, String pass){
-        firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        /*firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
@@ -72,6 +63,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Login Failed!", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
     }
 }
